@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Bug Squasher</title>
+
+		<script src="node_modules/jquery/dist/jquery.js" type="application/javascript"></script>
+		<script src="node_modules/underscore/underscore.js" type="application/javascript"></script>
+		<script src="node_modules/backbone/backbone.js" type="application/javascript"></script>
+		<script src="node_modules/snapsvg/dist/snap.svg.js" type="application/javascript"></script>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+
+		<style>
+			body {
+				overflow: hidden;
+				background: url('images/background.jpg');
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Header bar -->
+		<div id="navbar" class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<span class="navbar-brand">Bug Squasher</span>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a class="instructions"
+							   data-target="instructions"
+							   href="#"><span class="glyphicon glyphicon-question-sign"></span> Instructions</a></li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#" class="pause"><span class="text-warning glyphicon glyphicon-pause"></span> <span
+								class="text-warning"><strong>Pause</strong></span></a></li>
+						<li><a href="#" class="play"><span class="text-success glyphicon glyphicon-play"></span> <span
+								class="text-success"><strong>Play</strong></span></a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-tower"></span> Level:
+							<span class="level">1</span></a>
+						</li>
+						<li><a href="#"
+							   class="high-scores"
+							   data-target="high-scores"><span class="glyphicon glyphicon-screenshot"></span> Score:
+							<span class="score">0</span></a>
+						</li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+
+		<!-- Save High Score Modal -->
+		<div class="modal fade"
+			 id="game-over"
+			 tabindex="-1"
+			 role="dialog"
+			 aria-labelledby="Game Over"
+			 aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Game Over!</h4>
+					</div>
+					<div class="modal-body">
+						<p>A bug made it to the other side!  Your final score is <strong><span class="final-score">-</span></strong></p>
+
+						<div class="high-score">
+							<p>Congratulations, you've received a new high score! Please give us your name to make history!</p>
+
+							<div class="input-group">
+								<span class="input-group-addon">Your Name</span> <input type="text"
+																						class="username form-control">
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default">Close</button>
+						<button type="button" class="high-score btn btn-success">Make History!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Instruction Modal -->
+		<div class="modal fade"
+			 id="instructions"
+			 tabindex="-1"
+			 role="dialog"
+			 aria-labelledby="Instructions"
+			 aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Welcome!</h4>
+					</div>
+					<div class="modal-body">
+						<h4>Instructions</h4>
+
+						<p>Bugs will appear on the left side of the playing screen in random locations, and make their way to the right side of the playing screen. Each time a bug is squashed, your score will increase.</p>
+
+						<p>If a bug reaches the right side of the playing screen without getting squashed, you will lose. There are three different types of bugs; harder bugs are worth more points but more difficult to swat. The game will become harder the longer you play.</p>
+
+						<div id="high-scores">
+							<h4>High Scores</h4>
+
+							<ul class="list-group">
+								<!--<li class="list-group-item">Placeholder <span class="badge">0</span></li>-->
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default">Close</button>
+						<button type="button" class="new-game btn btn-success">Start New Game!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- SVG component here -->
+		<svg id="game"/>
+
+		<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="NS.js" type="application/javascript"></script>
+
+		<!-- Modals -->
+		<script src="score/GameOver.js" type="application/javascript"></script>
+		<script src="score/Instructions.js" type="application/javascript"></script>
+
+		<!-- Players -->
+		<script src="player/Transform.js" type="application/javascript"></script>
+		<script src="player/Player.js" type="application/javascript"></script>
+
+		<script src="player/Bug.js" type="application/javascript"></script>
+		<script src="player/Fly.js" type="application/javascript"></script>
+		<script src="player/Fly2.js" type="application/javascript"></script>
+		<script src="player/Ant.js" type="application/javascript"></script>
+
+		<script src="player/Swatter.js" type="application/javascript"></script>
+
+		<!-- Game -->
+		<script src="board/Game.js" type="application/javascript"></script>
+		<script src="board/Header.js" type="application/javascript"></script>
+		<script src="board/Application.js" type="application/javascript"></script>
+
+		<script type="application/javascript">
+			$( window ).ready( function () {
+				( new co.hardison.flyswat.Application( {
+					count: 10
+				} ) ).render();
+			} );
+		</script>
+	</body>
+</html>
