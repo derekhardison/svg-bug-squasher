@@ -45,6 +45,11 @@ co.hardison.flyswat.Application = Backbone.View.extend( {
 	 * @param event
 	 */
     onSwat : function ( event ) {
+		if ( !this.model.isPlaying() ) {
+			// stop here, not playing.
+			return;
+		}
+	
 		var remove = _.filter( this.bugs, event.view.isBBoxIntersect, event.view ),
 			bug;
 
